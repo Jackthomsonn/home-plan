@@ -1,10 +1,28 @@
 package grid
 
-type Grid struct{}
+import (
+	"net/http"
 
-func NewGridService() *Grid {
-	return &Grid{}
+	"gorm.io/gorm"
+)
+
+type Grid struct {
+	addr string
+	db   *gorm.DB
 }
 
-func (svc *Grid) Collect() {
+func NewGridService(addr string, db *gorm.DB) *Grid {
+	return &Grid{
+		addr: addr,
+		db:   db,
+	}
+}
+
+func (svc *Grid) setupRoutes() {
+	http.HandleFunc("/grid", HandleGrid)
+}
+
+func (svc *Grid) Start() {
+	svc.setupRoutes()
+	http.ListenAndServe(svc.addr, nil)
 }

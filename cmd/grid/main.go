@@ -1,7 +1,7 @@
 package main
 
 import (
-	"github.com/jackthomsonn/home-plan/connect"
+	"github.com/jackthomsonn/home-plan/grid"
 	"github.com/jackthomsonn/home-plan/internal"
 )
 
@@ -10,8 +10,8 @@ func main() {
 	if err != nil {
 		panic(err)
 	}
-	db.AutoMigrate(&internal.Device{})
+	db.AutoMigrate(&internal.Grid{})
 
-	connectionSvc := connect.NewConnectionService(":8080", db)
+	connectionSvc := grid.NewGridService(":8080", db)
 	connectionSvc.Start()
 }

@@ -4,26 +4,23 @@ import (
 	"net/http"
 
 	"github.com/jackthomsonn/home-plan/connections"
-	"github.com/jackthomsonn/home-plan/grid"
-	"github.com/jackthomsonn/home-plan/weather"
+	"gorm.io/gorm"
 )
 
 type Optimiser struct {
 	connection connections.Connection
 	addr       string
-	gridSvc    grid.Grid
-	weatherSvc weather.Weather
+	db         *gorm.DB
 }
 
 type OptimiserRequest struct {
 	Type string `json:"type"`
 }
 
-func NewOptimiserService(grid grid.Grid, weather weather.Weather, addr string) *Optimiser {
+func NewOptimiserService(addr string, db *gorm.DB) *Optimiser {
 	return &Optimiser{
-		addr:       addr,
-		gridSvc:    grid,
-		weatherSvc: weather,
+		addr: addr,
+		db:   db,
 	}
 }
 

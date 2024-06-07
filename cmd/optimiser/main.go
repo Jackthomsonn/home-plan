@@ -1,15 +1,17 @@
 package main
 
 import (
-	"github.com/jackthomsonn/home-plan/grid"
+	"github.com/jackthomsonn/home-plan/internal"
 	"github.com/jackthomsonn/home-plan/optimiser"
-	"github.com/jackthomsonn/home-plan/weather"
 )
 
 func main() {
-	gridSvc := grid.NewGridService()
-	weatherSvc := weather.NewWeatherService()
-	optimiserSvc := optimiser.NewOptimiserService(*gridSvc, *weatherSvc, ":8080")
+	db, err := internal.CreateConnection()
+	if err != nil {
+		panic(err)
+	}
+	db.AutoMigrate(&internal.Plan{})
 
+	optimiserSvc := optimiser.NewOptimiserService(":8080", db)
 	optimiserSvc.Start()
 }

@@ -1,10 +1,10 @@
-package connect
+package grid
 
 import (
 	"net/http"
 )
 
-func HandleConnect(w http.ResponseWriter, r *http.Request, svc Connect) {
+func HandleGrid(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "application/json")
 	w.WriteHeader(http.StatusOK)
 }

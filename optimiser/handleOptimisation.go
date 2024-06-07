@@ -51,17 +51,9 @@ func HandleOptimisation(w http.ResponseWriter, r *http.Request, svc Optimiser) {
 }
 
 func CreatePlan(svc Optimiser) Plan {
-	svc.weatherSvc.Collect()
-	svc.gridSvc.Collect()
+	// Get data from Weather and Grid Service (RPC)
 	// Do some calculations
 	// ...
-	result := Skip
-
-	if result == Skip {
-		return Plan{
-			Event: Skip,
-		}
-	}
 
 	return Plan{
 		Event: Raise,

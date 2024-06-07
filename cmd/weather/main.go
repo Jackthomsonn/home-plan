@@ -1,8 +1,8 @@
 package main
 
 import (
-	"github.com/jackthomsonn/home-plan/connect"
 	"github.com/jackthomsonn/home-plan/internal"
+	"github.com/jackthomsonn/home-plan/weather"
 )
 
 func main() {
@@ -10,8 +10,8 @@ func main() {
 	if err != nil {
 		panic(err)
 	}
-	db.AutoMigrate(&internal.Device{})
+	db.AutoMigrate(&internal.Weather{})
 
-	connectionSvc := connect.NewConnectionService(":8080", db)
+	connectionSvc := weather.NewWeatherService(":8080", db)
 	connectionSvc.Start()
 }
