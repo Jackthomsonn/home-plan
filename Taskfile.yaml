@@ -1,0 +1,27 @@
+version: '3'
+
+tasks:
+  build:connect:
+    cmds:
+      - docker build -t github.com/jackthomsonn/home-plan/connect --build-arg SERVICE_NAME=connect .
+    desc: "Build connect"
+  
+  build:optimiser:
+    cmds:
+      - docker build -t github.com/jackthomsonn/home-plan/optimiser --build-arg SERVICE_NAME=optimiser .
+    desc: "Build Optimiser"
+
+  run:home-plan:
+    cmds:
+      - docker compose up
+    desc: "Run Home Plan"
+
+  lint:
+    cmds:
+      - go fmt
+    desc: "Lint"
+
+  lint:naming:conventions:
+    cmds:
+      - ./ls-lint
+    desc: "Lint Naming Conventions"

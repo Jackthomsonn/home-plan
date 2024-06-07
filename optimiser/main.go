@@ -15,9 +15,12 @@ type Optimiser struct {
 	weatherSvc weather.Weather
 }
 
-func NewOptimiserService(c connections.Connection, grid grid.Grid, weather weather.Weather, addr string) *Optimiser {
+type OptimiserRequest struct {
+	Type string `json:"type"`
+}
+
+func NewOptimiserService(grid grid.Grid, weather weather.Weather, addr string) *Optimiser {
 	return &Optimiser{
-		connection: c,
 		addr:       addr,
 		gridSvc:    grid,
 		weatherSvc: weather,

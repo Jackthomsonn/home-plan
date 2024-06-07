@@ -1,0 +1,7 @@
+ls:
+  .go: snake_case
+  .dir: kebab-case
+
+ignore:
+  - .git
+  - .vscode

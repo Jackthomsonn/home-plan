@@ -5,7 +5,7 @@ type NestConnection struct {
 
 func (n *NestConnection) Connect() {}
 
-func (n *NestConnection) ControlTemperature(temperature float64) {}
+func (n *NestConnection) ControlTemperature(temperature uint32) {}
 
 func NewNestConnection() *NestConnection {
 	return &NestConnection{}
